@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title>からつ・いまりタイマー</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#5cb85c">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="main.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+    <span class="navbar-brand">からつ・いまりタイマー</span>
+  </nav>
+
+  <div class="text-center pt-5 mt-4">
+    <div class="btn-group btn-group-toggle text-center" data-toggle="buttons">
+      <label class="btn btn-success">
+        <input type="radio" name="options" id="option1" value="tenjin" autocomplete="off" onchange="selectedDep(this.value)">天神
+      </label>
+      <label class="btn btn-success">
+        <input type="radio" name="options" id="option2" value="hakata" autocomplete="off" onchange="selectedDep(this.value)">博多
+      </label>
+      <label class="btn btn-success">
+        <input type="radio" name="options" id="option3" value="fukdom" autocomplete="off" onchange="selectedDep(this.value)">福岡空港
+      </label>
+    </div>
+  </div>
+
+  <div id="initMsg" class="text-center m-2" style="display: block;">
+    乗車地を選択してください
+  </div>
+
+  <div id="depInfo" class="text-center m-2" style="display: none;">
+    <label id="depName"></label>
+    <br>
+    <div id="day"></div>
+  </div>
+
+  <div id="loadingIcon" class="text-center m-5" style="display: none;">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw" style="color: green"></i>
+  </div>
+
+  <div id="fetchError" class="alert alert-danger m-3" role="alert" style="display: none;">
+    サーバとの通信に失敗しました。<br>再度選択してください。
+  </div>
+
+  <div id="trips" class="pb-5" style="display: none;">
+    <div id="trip0" class="card m-3">
+      <div id="tripInfo0" class="card-header p-2"></div>
+      <div class="card-body text-center p-2">
+        <div id="tripDep0"></div>
+        <div id="tripTimer0" class="font-weight-bold"></div>
+      </div>
+    </div>
+
+    <div id="trip1" class="card m-3">
+      <div id="tripInfo1" class="card-header p-2"></div>
+      <div class="card-body text-center p-2">
+        <div id="tripDep1"></div>
+        <div id="tripTimer1" class="font-weight-bold"></div>
+      </div>
+    </div>
+
+    <div id="trip2" class="card m-3">
+      <div id="tripInfo2" class="card-header p-2"></div>
+      <div class="card-body text-center p-2">
+        <div id="tripDep2"></div>
+        <div id="tripTimer2" class="font-weight-bold"></div>
+      </div>
+    </div>
+
+    <div class="text-center text-muted small">
+      2019年7月21日 改正
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-light fixed-bottom text-muted small">
+    <a href="about.html" target="_blank" rel="noopener">このアプリについて</a>
+    <a href="https://github.com/egamasa/KaratsuImariTimer" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://orangeliner.net" target="_blank" rel="noopener">orangeliner.net</a>
+  </nav>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>
+
+</html>

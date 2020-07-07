@@ -29,13 +29,13 @@
   <div class="text-center pt-5 mt-4">
     <div class="btn-group btn-group-toggle text-center" data-toggle="buttons">
       <label class="btn btn-success">
-        <input type="radio" name="options" id="option1" value="tenjin" autocomplete="off" onchange="selectedDep(this.value)">天神
+        <input type="radio" name="options" id="option1" value="tenjin" autocomplete="off" onchange="selectSta(this.value)">天神
       </label>
       <label class="btn btn-success">
-        <input type="radio" name="options" id="option2" value="hakata" autocomplete="off" onchange="selectedDep(this.value)">博多
+        <input type="radio" name="options" id="option2" value="hakata" autocomplete="off" onchange="selectSta(this.value)">博多
       </label>
       <label class="btn btn-success">
-        <input type="radio" name="options" id="option3" value="fukdom" autocomplete="off" onchange="selectedDep(this.value)">福岡空港
+        <input type="radio" name="options" id="option3" value="fukdom" autocomplete="off" onchange="selectSta(this.value)">福岡空港
       </label>
     </div>
   </div>
@@ -44,10 +44,10 @@
     乗車地を選択してください
   </div>
 
-  <div id="depInfo" class="text-center m-2" style="display: none;">
-    <label id="depName"></label>
+  <div id="tripInfo" class="text-center m-2" style="display: none;">
+    <label id="staName"></label>
     <br>
-    <div id="day"></div>
+    <div id="diaInfo"></div>
   </div>
 
   <div id="loadingIcon" class="text-center m-5" style="display: none;">
@@ -89,8 +89,8 @@
   </div>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-light fixed-bottom text-muted small">
-    <a href="about.html" target="_blank" rel="noopener">このアプリについて</a>
-    <a href="https://github.com/egamasa/KaratsuImariTimer" target="_blank" rel="noopener">GitHub</a>
+    <a href="about.html" target="_blank" rel="noopener">このアプリについて</a>&nbsp;
+    <a href="https://github.com/egamasa/KaratsuImariTimer" target="_blank" rel="noopener">GitHub</a>&nbsp;
     <a href="https://orangeliner.net" target="_blank" rel="noopener">orangeliner.net</a>
   </nav>
 

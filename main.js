@@ -1,9 +1,9 @@
 // APIアクセス
-function selectedDep(value) {
+function selectSta(station) {
   dispLoad();
+  depTimes = [];
 
-  // fetch('https://bustimer.orangeliner.net/apiv1.php?dep=' + value.toString())
-  fetch('https://bustimer.orangeliner.net/api_dev.php?dep=' + value.toString())
+  fetch(`https://bustimer.orangeliner.net/apiv1.php?sta=${station}`)
     .then(function(response) {
       return response.json();
     })
@@ -17,95 +17,89 @@ function selectedDep(value) {
 
 // 取得データ表示
 function loadSuccess(json) {
-    document.getElementById('depName').innerHTML = json.dep;
+  document.getElementById('staName').innerHTML = json.station;
 
-    let diaDay = ''
-    if (json.day == '平日') {
-      diaDay += '<span class="badge badge-success">';
-    } else if (json.day == '土曜') {
-      diaDay += '<span class="badge badge-primary">';
-    } else if (json.day == '日祝') {
-      diaDay += '<span class="badge badge-danger">';
-    }
-    document.getElementById('day').innerHTML = diaDay + json.day + ' ダイヤ </span>';
+  let dia = ''
+  if (json.diaType == 'weekday') {
+    dia += '<span class="badge badge-success">';
+  } else if (json.diaType == 'saturday') {
+    dia += '<span class="badge badge-primary">';
+  } else if (json.diaType == 'holiday') {
+    dia += '<span class="badge badge-danger">';
+  }
+  document.getElementById('diaInfo').innerHTML = `${dia}${json.diaTypeName} ダイヤ</span>`;
 
-    for (i = 0; i < json.trip.length; i++) {
-      if (json.trip[i]) {
-        let tripFor = '';
-        if (json.trip[i].route == 'karatsu') {
-          tripFor = '<h5><span class="badge badge-success">からつ</span>';
-        } else if (json.trip[i].route == 'imari') {
-          tripFor = '<h5><span class="badge badge-warning">いまり</span>';
-        }
-        document.getElementById("tripInfo" + i).innerHTML = tripFor + '&nbsp' + json.trip[i].for + '</h5>';
-
-        let depTime = new Date(json.trip[i].time);
-        document.getElementById("tripDep" + i).innerHTML = depTime.getHours() + ' : ' + depTime.getMinutes() + ' 発';
-
-        let myTimer = new Timer(json.trip[i].time, 'tripTimer' + i);
-        myTimer.countDown();
-
-      } else {
-        document.getElementById("tripInfo" + i).innerHTML = 'データがありません';
-        document.getElementById("tripDep" + i).innerHTML = '-- : --';
+  for (i = 0; i < json.trips.length; i++) {
+    if (json.trips[i]) {
+      let tripInfo = '';
+      if (json.trips[i].route == 'karatsu') {
+        tripInfo = '<h5><span class="badge badge-success">';
+      } else if (json.trips[i].route == 'imari') {
+        tripInfo = '<h5><span class="badge badge-warning">';
       }
-    }
+      document.getElementById(`tripInfo${i}`).innerHTML = `${tripInfo}${json.trips[i].routeName}</span>&nbsp${json.trips[i].dest}</h5>`;
 
-    dispSuccess();
+      let depTime = new Date(json.trips[i].depTime);
+      document.getElementById(`tripDep${i}`).innerHTML = `${depTime.getHours()} : ${depTime.getMinutes().toString().padStart(2, '0')} 発`;
+
+      depTimes[i] = json.trips[i].depTime;
+
+    } else {
+      document.getElementById(`tripInfo${i}`).innerHTML = 'データがありません';
+      document.getElementById(`tripDep${i}`).innerHTML = '-- : --';
+      document.getElementById(`tripTimer${i}`).innerHTML = '';
+    }
+  }
+
+  dispSuccess();
+  setInterval(calculateTime, 1000);
 }
 
 // カウントダウン
-let Timer = function(depTime, outputElement) {
-  this.depTime = depTime;
-  this.outputElement = outputElement;
-};
+function calculateTime() {
+  let currentTime = new Date();
 
-Timer.prototype.countDown = function() {
-  let depTime = new Date(this.depTime);
-  let oneDay = 24 * 60 * 60 * 1000;
-  let countDownTimer = document.getElementById(this.outputElement);
-  let currentTimeCD = new Date();
-  let untilStartTime = new Date();
-  let h = 0;
-  let m = 0;
-  let s = 0;
+  for (i = 0; i < depTimes.length; i++) {
+    let departureTime = new Date(depTimes[i]);
+    let remainTime = departureTime - currentTime;
+    let outputElement = document.getElementById(`tripTimer${i}`);
+    let oneDay = 24 * 60 * 60 * 1000;
+    let h = 0;
+    let m = 0;
+    let s = 0;
 
-  setInterval(calculateTime, 1000);
+    if (currentTime < departureTime) {
+      h = Math.floor((remainTime % oneDay) / (60 * 60 * 1000));
+      m = Math.floor((remainTime % oneDay) / (60 * 1000)) % 60;
+      s = Math.floor((remainTime % oneDay) / 1000) % 60 % 60;
 
-  function calculateTime() {
-    currentTimeCD = new Date();
-    untilStartTime = depTime - currentTimeCD;
-
-    if (currentTimeCD < depTime) {
-      h = Math.floor((untilStartTime % oneDay) / (60 * 60 * 1000));
-      m = Math.floor((untilStartTime % oneDay) / (60 * 1000)) % 60;
-      s = Math.floor((untilStartTime % oneDay) / 1000) % 60 % 60;
-    }
-
-    showTime();
-  }
-
-  function showTime() {
-    if (currentTimeCD < depTime) {
-      countDownTimer.innerHTML = 'あと ' + h + ' 時間 ' + m + ' 分 ' + s + ' 秒';
+      if (h == 0) {
+        outputElement.innerHTML = `あと ${m} 分 ${s} 秒`;
+      } else {
+        outputElement.innerHTML = `あと ${h} 時間 ${m} 分 ${s} 秒`;
+      }
     } else {
-      countDownTimer.innerHTML = '出発済み';
+      outputElement = '出発済み';
     }
   }
 }
+
 
 // 表示制御
 function dispLoad() {
   document.getElementById('initMsg').style.display = 'none';
-  document.getElementById('depInfo').style.display = 'none';
+  document.getElementById('tripInfo').style.display = 'none';
   document.getElementById('loadingIcon').style.display = 'block';
   document.getElementById('fetchError').style.display = 'none';
   document.getElementById('trips').style.display = 'none';
+  document.getElementById('tripTimer0').innerHTML = '読み込み中...';
+  document.getElementById('tripTimer1').innerHTML = '読み込み中...';
+  document.getElementById('tripTimer2').innerHTML = '読み込み中...';
 }
 
 function dispSuccess() {
   document.getElementById('initMsg').style.display = 'none';
-  document.getElementById('depInfo').style.display = 'block';
+  document.getElementById('tripInfo').style.display = 'block';
   document.getElementById('loadingIcon').style.display = 'none';
   document.getElementById('fetchError').style.display = 'none';
   document.getElementById('trips').style.display = 'block';
@@ -113,7 +107,7 @@ function dispSuccess() {
 
 function dispError() {
   document.getElementById('initMsg').style.display = 'none';
-  document.getElementById('depInfo').style.display = 'none';
+  document.getElementById('tripInfo').style.display = 'none';
   document.getElementById('loadingIcon').style.display = 'none';
   document.getElementById('fetchError').style.display = 'block';
   document.getElementById('trips').style.display = 'none';

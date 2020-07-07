@@ -79,8 +79,8 @@ if (!$dia_type) {
     $dia_type = $DIA_TYPE_LIST[$now_time->format('w')];
 }
 
-$response['dia_type'] = $dia_type;
-$response['dia_type_name'] = $DIA_TYPE_NAME[$dia_type];
+$response['diaType'] = $dia_type;
+$response['diaTypeName'] = $DIA_TYPE_NAME[$dia_type];
 
 
 // 発車時刻データ抽出
@@ -94,7 +94,7 @@ foreach ($schedule as $trip) {
     if (($dep_time->format('U')) - ($now_time->format('U')) > 30) {
         $response['trips'][$count] = $trip;
         $response['trips'][$count]['depTime'] = $dep_time->format('Y/m/d H:i:s');
-        $response['trips'][$count]['route_name'] = $ROUTE_NAME[$trip['route']];
+        $response['trips'][$count]['routeName'] = $ROUTE_NAME[$trip['route']];
         $count++;
     }
     if ($count > 2) {

@@ -79,7 +79,7 @@ function calculateTime() {
         outputElement.innerHTML = `あと ${h} 時間 ${m} 分 ${s} 秒`;
       }
     } else {
-      outputElement = '出発済み';
+      outputElement.innerHTML = '出発済み';
     }
   }
 }

@@ -1,9 +1,11 @@
+const apiUrl = 'https://bustimer.orangeliner.net/apiv1.php?sta=';
+
 // APIアクセス
 function selectSta(station) {
   dispLoad();
   depTimes = [];
 
-  fetch(`https://bustimer.orangeliner.net/apiv1.php?sta=${station}`)
+  fetch(`${apiUrl}${station}`)
     .then(function(response) {
       return response.json();
     })
@@ -40,13 +42,13 @@ function loadSuccess(json) {
       document.getElementById(`tripInfo${i}`).innerHTML = `${tripInfo}${json.trips[i].routeName}</span>&nbsp${json.trips[i].dest}</h5>`;
 
       let depTime = new Date(json.trips[i].depTime);
-      document.getElementById(`tripDep${i}`).innerHTML = `${depTime.getHours()} : ${depTime.getMinutes().toString().padStart(2, '0')} 発`;
+      document.getElementById(`tripDep${i}`).innerHTML = `<h4><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;${depTime.getHours()} : ${depTime.getMinutes().toString().padStart(2, '0')} 発</h4>`;
 
       depTimes[i] = json.trips[i].depTime;
 
     } else {
-      document.getElementById(`tripInfo${i}`).innerHTML = 'データがありません';
-      document.getElementById(`tripDep${i}`).innerHTML = '-- : --';
+      document.getElementById(`tripInfo${i}`).innerHTML  = 'データがありません';
+      document.getElementById(`tripDep${i}`).innerHTML   = '-- : --';
       document.getElementById(`tripTimer${i}`).innerHTML = '';
     }
   }

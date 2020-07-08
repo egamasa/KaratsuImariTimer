@@ -4,38 +4,48 @@
 <head>
   <meta charset="utf-8">
   <title>からつ・いまりタイマー</title>
-  <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#5cb85c">
 
-  <meta property="og:title" content="">
-  <meta property="og:type" content="">
-  <meta property="og:url" content="">
+  <meta name="robots" content="index, nofollow">
+
+  <meta name="description" content="昭和バスからつ号・いまり号の福岡エリア発車時刻をカウントダウンするシンプルなWebアプリ">
+  <meta property="og:title" content="からつ・いまりタイマー">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://bustimer.orangeliner.net">
+  <meta property="og:description" content="昭和バスからつ号・いまり号の福岡エリア発車時刻をカウントダウンするシンプルなWebアプリ">
+  <meta property="og:site_name" content="orangeliner.net">
   <meta property="og:image" content="">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@asagiri96mc">
+  <meta name="twitter:creator" content="@asagiri96mc">
+  <link rel="canonical" href="https://bustimer.orangeliner.net">
 
   <link rel="manifest" href="site.webmanifest">
   <link rel="apple-touch-icon" href="icon.png">
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/mplus1p.css">
+  <link rel="stylesheet" href="./assets/style.css">
   <script src="./assets/main.js"></script>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
-    <span class="navbar-brand">からつ・いまりタイマー</span>
+  <nav class="navbar navbar-dark bg-success fixed-top">
+    <span class="navbar-brand"><i class="fa fa-bus" aria-hidden="true"></i>&nbsp;からつ・いまりタイマー</span>
   </nav>
 
   <div class="text-center pt-5 mt-4">
     <div class="btn-group btn-group-toggle text-center" data-toggle="buttons">
       <label class="btn btn-success">
-        <input type="radio" name="options" id="option1" value="tenjin" autocomplete="off" onchange="selectSta(this.value)">天神
+        <input type="radio" name="options" id="option1" value="tenjin" autocomplete="off" onchange="selectSta(this.value)"><i class="fa fa-building" aria-hidden="true"></i>&nbsp;天神
       </label>
       <label class="btn btn-success">
-        <input type="radio" name="options" id="option2" value="hakata" autocomplete="off" onchange="selectSta(this.value)">博多
+        <input type="radio" name="options" id="option2" value="hakata" autocomplete="off" onchange="selectSta(this.value)"><i class="fa fa-subway" aria-hidden="true"></i>&nbsp;博多
       </label>
       <label class="btn btn-success">
-        <input type="radio" name="options" id="option3" value="fukdom" autocomplete="off" onchange="selectSta(this.value)">福岡空港
+        <input type="radio" name="options" id="option3" value="fukdom" autocomplete="off" onchange="selectSta(this.value)"><i class="fa fa-plane" aria-hidden="true"></i>&nbsp;福岡空港
       </label>
     </div>
   </div>
@@ -58,7 +68,7 @@
     サーバとの通信に失敗しました。<br>再度選択してください。
   </div>
 
-  <div id="trips" class="pb-5" style="display: none;">
+  <div id="trips" style="display: none;">
     <div id="trip0" class="card m-3">
       <div id="tripInfo0" class="card-header p-2"></div>
       <div class="card-body text-center p-2">
@@ -82,19 +92,36 @@
         <div id="tripTimer2" class="font-weight-bold"></div>
       </div>
     </div>
+  </div>
 
-    <div class="text-center text-muted small">
-      2019年7月21日 改正
+  <div class="text-center text-muted small pb-5">
+    2019年7月21日 ダイヤ改正対応
+    <br>はじめに <a href="./about.html">アプリについて</a> をお読みください
+    <br>© 2020 egamasa
+  </div>
+
+  <div class="fixed-bottom m-2">
+    <div class="btn-group dropup">
+      <button type="button" class="btn btn-success btn-sm" onclick="location.href='./about.html'">
+        <i class="fa fa-book" aria-hidden="true"></i>&nbsp;アプリについて
+      </button>
+      <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only"></span>
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="http://qbus.jp/" target="_blank" rel="noopener"><i class="fa fa-bus" aria-hidden="true"></i>&nbsp;九州のバス時刻表</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://twitter.com/intent/tweet?text=%E3%80%90%E3%81%8B%E3%82%89%E3%81%A4%E3%83%BB%E3%81%84%E3%81%BE%E3%82%8A%E3%82%BF%E3%82%A4%E3%83%9E%E3%83%BC%E3%80%91%0A%E6%98%AD%E5%92%8C%E3%83%90%E3%82%B9%20%E3%81%8B%E3%82%89%E3%81%A4%E5%8F%B7%E3%83%BB%E3%81%84%E3%81%BE%E3%82%8A%E5%8F%B7%20%E7%A6%8F%E5%B2%A1%E3%82%A8%E3%83%AA%E3%82%A2%E7%99%BA%E8%BB%8A%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%83%80%E3%82%A6%E3%83%B3%E3%82%A2%E3%83%97%E3%83%AA&url=https%3A%2F%2Fbustimer.orangeliner.net&hashtags=%E6%98%AD%E5%92%8C%E3%83%90%E3%82%B9%2C%E3%81%8B%E3%82%89%E3%81%A4%E5%8F%B7%2C%E3%81%84%E3%81%BE%E3%82%8A%E5%8F%B7&via=asagiri96mc&related=asagiri96mc" target="_blank" rel="noopener"><i class="fa fa-twitter" aria-hidden="true"></i>&nbsp;Twitterでシェア</a>
+        <a class="dropdown-item" href="https://github.com/egamasa/KaratsuImariTimer" target="_blank" rel="noopener"><i class="fa fa-github" aria-hidden="true"></i>&nbsp;GitHub</a>
+        <a class="dropdown-item" href="https://twitter.com/asagiri96mc" target="_blank" rel="noopener"><i class="fa fa-twitter-square" aria-hidden="true"></i>&nbsp;作者のTwitter</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://orangeliner.net" target="_blank" rel="noopener"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;orangeliner.net</a>
+      </div>
     </div>
   </div>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-light fixed-bottom text-muted small">
-    <a href="about.html" target="_blank" rel="noopener">このアプリについて</a>&nbsp;
-    <a href="https://github.com/egamasa/KaratsuImariTimer" target="_blank" rel="noopener">GitHub</a>&nbsp;
-    <a href="https://orangeliner.net" target="_blank" rel="noopener">orangeliner.net</a>
-  </nav>
-
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->

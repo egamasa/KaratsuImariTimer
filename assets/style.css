@@ -1,0 +1,33 @@
+
+/* Fonts */
+body{
+    font-family: "Mplus 1p";
+}
+
+/* Buttons */
+.btn {
+    border-radius: 2px;
+}
+.btn-sm {
+    border-radius: 1px;
+}
+
+/* Font Awesome Icons */
+a>.fa-bus {
+    color: red;
+}
+.fa-twitter,.fa-twitter-square {
+    color: #55acee;
+}
+.fa-github {
+    color: #333;
+}
+.fa-home {
+    color: #ff6633;
+}
+.fa-exclamation-circle {
+    color: red;
+}
+.fa-database {
+    color: #555555;
+}

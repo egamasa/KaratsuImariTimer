@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title>アプリについて：からつ・いまりタイマー</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#5cb85c">
+
+  <meta name="robots" content="noindex">
+
+  <meta name="description" content="昭和バスからつ号・いまり号の福岡エリア発車時刻をカウントダウンするシンプルなWebアプリ">
+  <meta property="og:title" content="からつ・いまりタイマー">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://bustimer.orangeliner.net">
+  <meta property="og:description" content="昭和バスからつ号・いまり号の福岡エリア発車時刻をカウントダウンするシンプルなWebアプリ">
+  <meta property="og:site_name" content="orangeliner.net">
+  <meta property="og:image" content="">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@asagiri96mc">
+  <meta name="twitter:creator" content="@asagiri96mc">
+  <link rel="canonical" href="https://bustimer.orangeliner.net">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/earlyaccess/mplus1p.css" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/style.css">
+  <script src="./assets/main.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-success fixed-top">
+    <span class="navbar-brand"><i class="fa fa-book" aria-hidden="true"></i>&nbsp;このアプリについて</span>
+    <button type="button" class="btn btn-outline-light" onclick="location.href='./index.html'"><i class="fa fa-times" aria-hidden="true"></i></button>
+  </nav>
+
+  <div class="pt-5 m-3">
+    昭和バス「からつ号」「いまり号」の福岡エリア（天神・博多・福岡空港）発車時刻をカウントダウンするシンプルなWebアプリです。<br>
+    乗車地を選択すると、直近の出発便の発車時刻とカウントダウンを表示します。<br>
+    <br>
+    ※「データがありません」表示の場合は、当日中の運行が終了しています。
+    <hr>
+
+    <h5><i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;注意事項</h5>
+    <ul>
+      <li>バス会社の公式アプリではありません。時刻表データの誤り・更新遅延が発生する可能性があります。公式の時刻表を併せて確認いただく事をおすすめします。</li>
+      <li>Internet Explorer (R) では使用できません。</li>
+      <li>デバイスの時刻設定がずれている場合、正確なカウントダウン表示ができません。</li>
+      <li>システム上の都合により予告なくアプリの提供を中断・終了する可能性がありますのでご了承ください。</li>
+    </ul>
+    <hr>
+
+    <h5><i class="fa fa-database" aria-hidden="true"></i>&nbsp;使用データについて</h5>
+    オープンデータとして公開されている「佐賀県の路線バス情報のデータ」を加工して使用しています。<br>
+    <a href="http://opendata.sagabus.info/" target="_blank" rel="noopener">佐賀県の路線バス情報のデータ</a> は <a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">クリエイティブ・コモンズ 表示 4.0 国際 ライセンス</a> の下に提供されており、適切なクレジット表示を条件として、営利目的を含め複製・再配布・改変が可能です。
+    <hr>
+
+    <h5><i class="fa fa-copyright" aria-hidden="true"></i>&nbsp;著作権表示</h5>
+    Copyright (c) 2020 egamasa<br>
+    <ul class="list-unstyled pl-3">
+      <li><a href="https://github.com/egamasa/" target="_blank" rel="noopener"><i class="fa fa-github" aria-hidden="true"></i>&nbsp;GitHub [egamasa]</a></li>
+      <li><a href="https://twitter.com/asagiri96mc" target="_blank" rel="noopener"><i class="fa fa-twitter" aria-hidden="true"></i>&nbsp;Twitter @asagiri96mc</a></li>
+    </ul>
+    <i class="fa fa-balance-scale" aria-hidden="true"></i>&nbsp;Released under the <a href="https://opensource.org/licenses/mit-license.php" target="_blank" rel="noopener">MIT license</a>.<br>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>
+
+</html>

@@ -4,9 +4,10 @@ require 'csv'
 require 'json'
 
 # 佐賀県路線バスオープンデータ
-DATA_DIR        = 'saga-current'
+DATA_DIR        = 'saga-2020-07-01'
 TRIPS_FILE      = '/trips.txt'
 STOP_TIMES_FILE = '/stop_times.txt'
+CALENDAR_FILE   = '/calendar_dates.txt'
 
 # 路線ID
 ROUTE_ID = [
@@ -33,6 +34,13 @@ STATION_ID = {
     'fukdom' => '3606199-01',  # 福岡空港国内線
 }
 
+#
+SERVICE_ID = {
+    '3_平日' => 'weekday',
+    '3_土曜' => 'saturday',
+    '3_日祝' => 'holiday',
+}
+
 
 def makeJson(list, station)
     weekday  = []
@@ -41,39 +49,67 @@ def makeJson(list, station)
 
     list.each do |trip|
         # 系統番号=>行先
+        route = ''
         dest = ''
         if (trip[0].match(/17160/))
+            route = 'karatsu'
             dest = ROUTE_DEST['17160']
         elsif (trip[0].match(/30290/))
+            route = 'karatsu'
             dest = ROUTE_DEST['30290']
         elsif (trip[0].match(/30510/))
+            route = 'imari'
             dest = ROUTE_DEST['30510']
         elsif (trip[0].match(/30530/))
+            route = 'imari'
             dest = ROUTE_DEST['30530']
         elsif (trip[0].match(/32160/))
+            route = 'karatsu'
             dest = ROUTE_DEST['32160']
         else
         end
 
+        trip_data = {
+            "depTime" => trip[2],
+            "route" => route,
+            "dest" => dest
+        }
+
         # 運行ダイヤ振り分け
         if (trip[0].match(/3_平日/))
-            weekday.push([trip[2], dest])
+            # weekday.push({trip[2], route, dest})
+            weekday.push(trip_data)
         elsif (trip[0].match(/3_土曜/))
-            saturday.push([trip[2], dest])
+            # saturday.push({trip[2], route, dest})
+            saturday.push(trip_data)
         elsif (trip[0].match(/3_日祝/))
-            holiday.push([trip[2], dest])
+            # holiday.push({trip[2], route, dest])
+            holiday.push(trip_data)
         else
         end
     end
 
     # 出発時刻でソート
-    weekday.sort_by! {|trip| trip[0]}
-    saturday.sort_by! {|trip| trip[0]}
-    holiday.sort_by! {|trip| trip[0]}
+    # weekday.sort_by! {|trip| trip[0]}
+    # saturday.sort_by! {|trip| trip[0]}
+    # holiday.sort_by! {|trip| trip[0]}
+    weekday.sort_by! {|trip| trip['depTime']}
+    saturday.sort_by! {|trip| trip['depTime']}
+    holiday.sort_by! {|trip| trip['depTime']}
 
     # TODO: JSONファイル出力処理
+    File.open('./json/' + station + '_weekday.json', 'w') { |file|
+        file.puts(JSON.generate(weekday))
+    }
+    File.open('./json/' + station + '_saturday.json', 'w') { |file|
+        file.puts(JSON.generate(saturday))
+    }
+    File.open('./json/' + station + '_holiday.json', 'w') { |file|
+        file.puts(JSON.generate(holiday))
+    }
 
 end
+
 
 # 運行便抽出
 trip_list = []
@@ -106,3 +142,20 @@ end
 makeJson(tenjin, 'tenjin')
 makeJson(hakata, 'hakata')
 makeJson(fukdom, 'fukdom')
+
+# ダイヤ種別
+exception_date = {
+    'weekday'  => [],
+    'saturday' => [],
+    'holiday'  => [],
+}
+
+CSV.foreach(__dir__ + '/' + DATA_DIR + CALENDAR_FILE, liberal_parsing: true) do |row|
+    if (SERVICE_ID.has_key?(row[0]))
+        exception_date[SERVICE_ID[row[0]]].push(row[1])
+    end
+end
+
+File.open('./json/exception_date.json', 'w') { |file|
+    file.puts(JSON.generate(exception_date))
+}

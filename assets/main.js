@@ -97,6 +97,8 @@ function dispLoad() {
   document.getElementById('tripTimer0').innerHTML = '読み込み中...';
   document.getElementById('tripTimer1').innerHTML = '読み込み中...';
   document.getElementById('tripTimer2').innerHTML = '読み込み中...';
+  document.getElementById('tripTimer3').innerHTML = '読み込み中...';
+  document.getElementById('tripTimer4').innerHTML = '読み込み中...';
 }
 
 function dispSuccess() {

@@ -97,12 +97,14 @@ foreach ($schedule as $trip) {
         $response['trips'][$count]['routeName'] = $ROUTE_NAME[$trip['route']];
         $count++;
     }
-    if ($count > 2) {
+    if ($count > 4) {
         break;
     }
 }
-if ($count < 3) {
-    foreach (range($count, 2) as $i) {
+
+// 5件に満たない場合はNULLで埋める
+if ($count < 5) {
+    foreach (range($count, 4) as $i) {
         $response['trips'][$i] = NULL;
     }
 }

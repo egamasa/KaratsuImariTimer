@@ -4,7 +4,7 @@ require 'csv'
 require 'json'
 
 # 佐賀県路線バスオープンデータ
-DATA_DIR        = 'saga-2020-07-01'
+DATA_DIR        = 'saga-2020-07-21'
 TRIPS_FILE      = '/trips.txt'
 STOP_TIMES_FILE = '/stop_times.txt'
 CALENDAR_FILE   = '/calendar_dates.txt'

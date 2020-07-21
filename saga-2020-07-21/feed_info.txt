@@ -1,0 +1,2 @@
+﻿"feed_publisher_name","feed_publisher_url","feed_lang","feed_start_date","feed_end_date","feed_version"
+"佐賀県","https://www.pref.saga.lg.jp/","ja","20200721","20210721","20200721-1-35-3-7-4-11-5-5-81-4-89-3"

@@ -4,26 +4,26 @@ require 'csv'
 require 'json'
 
 # 佐賀県路線バスオープンデータ
-DATA_DIR        = 'saga-2020-07-21'
+DATA_DIR        = 'saga-2022-04-01'
 TRIPS_FILE      = '/trips.txt'
 STOP_TIMES_FILE = '/stop_times.txt'
 CALENDAR_FILE   = '/calendar_dates.txt'
 
 # 路線ID
 ROUTE_ID = [
-    '300017160',  # からつ号・博多→宝当桟橋
-    '300030290',  # からつ号・福岡空港→宝当桟橋
-    '300030510',  # いまり号・博多→伊万里
-    '300030530',  # いまり号・福岡空港→伊万里
-    '300032160',  # からつ号・博多→唐津城入口
+    '17160',  # からつ号・博多→宝当桟橋
+    '30290',  # からつ号・福岡空港→宝当桟橋
+    '34900',  # いまり号・博多→伊万里
+    '34920',  # いまり号・福岡空港→伊万里
+    '32160',  # からつ号・博多→唐津城入口
 ]
 
 # 系統番号<=>行先
 ROUTE_DEST = {
     '17160' => '唐津（宝当桟橋）',
     '30290' => '唐津（宝当桟橋）',
-    '30510' => '山本・北波多・伊万里',
-    '30530' => '山本・北波多・伊万里',
+    '34900' => '山本・北波多・伊万里',
+    '34920' => '山本・北波多・伊万里',
     '32160' => '唐津（唐津城入口）',
 }
 
@@ -57,12 +57,12 @@ def makeJson(list, station)
         elsif (trip[0].match(/30290/))
             route = 'karatsu'
             dest = ROUTE_DEST['30290']
-        elsif (trip[0].match(/30510/))
+        elsif (trip[0].match(/34900/))
             route = 'imari'
-            dest = ROUTE_DEST['30510']
-        elsif (trip[0].match(/30530/))
+            dest = ROUTE_DEST['34900']
+        elsif (trip[0].match(/34920/))
             route = 'imari'
-            dest = ROUTE_DEST['30530']
+            dest = ROUTE_DEST['34920']
         elsif (trip[0].match(/32160/))
             route = 'karatsu'
             dest = ROUTE_DEST['32160']
@@ -90,14 +90,11 @@ def makeJson(list, station)
     end
 
     # 出発時刻でソート
-    # weekday.sort_by! {|trip| trip[0]}
-    # saturday.sort_by! {|trip| trip[0]}
-    # holiday.sort_by! {|trip| trip[0]}
     weekday.sort_by! {|trip| trip['depTime']}
     saturday.sort_by! {|trip| trip['depTime']}
     holiday.sort_by! {|trip| trip['depTime']}
 
-    # TODO: JSONファイル出力処理
+    # JSONファイル出力処理
     File.open('./json/' + station + '_weekday.json', 'w') { |file|
         file.puts(JSON.generate(weekday))
     }
@@ -115,7 +112,7 @@ end
 trip_list = []
 
 CSV.foreach(__dir__ + '/' + DATA_DIR + TRIPS_FILE, liberal_parsing: true) do |row|
-    if (ROUTE_ID.include?(row[0]))
+    if (ROUTE_ID.include?(row[2].slice(/\d{5}$/)))
         trip_list.push(row[2])
     end
 end

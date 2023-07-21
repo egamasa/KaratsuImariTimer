@@ -24,7 +24,7 @@ $EXCEPTION_DATE_FILE = './json/exception_date.json';
 $STATION_LIST = [
     'tenjin' => '西鉄天神高速バスターミナル【５番】',
     'hakata' => '博多バスターミナル【3F・32番】',
-    'fukdom' => '福岡空港国内線【北・15番】'
+    'fukdom' => '福岡空港国内線【北・16番】'
 ];
 
 $DIA_TYPE_LIST = [

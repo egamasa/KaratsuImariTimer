@@ -1,0 +1,6 @@
+﻿"agency_id","agency_official_name","agency_zip_number","agency_address","agency_president_pos","agency_president_name"
+"3000020412015","","","","",""
+"9300001007204","昭和自動車株式会社","","","",""
+"6300001004996","","","","",""
+"3000020412025","","","","",""
+"9000020412091","佐賀県嬉野市","","","",""

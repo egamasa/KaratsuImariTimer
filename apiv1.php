@@ -5,17 +5,20 @@ $SCHEDULE_FILE = [
     'tenjin' => [
         'weekday'  => './json/tenjin_weekday.json',
         'saturday' => './json/tenjin_saturday.json',
-        'holiday'  => './json/tenjin_holiday.json'
+        'holiday'  => './json/tenjin_holiday.json',
+        'newyear'  => './json/tenjin_newyear.json'
     ],
     'hakata' => [
         'weekday'  => './json/hakata_weekday.json',
         'saturday' => './json/hakata_saturday.json',
-        'holiday'  => './json/hakata_holiday.json'
+        'holiday'  => './json/hakata_holiday.json',
+        'newyear'  => './json/hakata_newyear.json'
     ],
     'fukdom' => [
         'weekday'  => './json/fukdom_weekday.json',
         'saturday' => './json/fukdom_saturday.json',
-        'holiday'  => './json/fukdom_holiday.json'
+        'holiday'  => './json/fukdom_holiday.json',
+        'newyear'  => './json/fukdom_newyear.json'
     ]
 ];
 
@@ -41,6 +44,7 @@ $DIA_TYPE_NAME = [
     'weekday'  => '平日',
     'saturday' => '土曜',
     'holiday'  => '日祝'
+    'newyear'  => '年末年始'
 ];
 
 $ROUTE_NAME = [

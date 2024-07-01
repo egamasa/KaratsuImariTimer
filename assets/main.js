@@ -28,6 +28,8 @@ function loadSuccess(json) {
     dia += '<span class="badge badge-primary">';
   } else if (json.diaType == 'holiday') {
     dia += '<span class="badge badge-danger">';
+  } else if (json.diaType == 'newyear') {
+    dia += '<span class="badge badge-danger">';
   }
   document.getElementById('diaInfo').innerHTML = `${dia}${json.diaTypeName} ダイヤ</span>`;
 

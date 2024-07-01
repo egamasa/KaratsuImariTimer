@@ -34,11 +34,12 @@ STATION_ID = {
     'fukdom' => '3606199-01',  # 福岡空港国内線
 }
 
-#
+# ダイヤ種別
 SERVICE_ID = {
     '3_平日' => 'weekday',
     '3_土曜' => 'saturday',
     '3_日祝' => 'holiday',
+    '3_年末・年始' => 'newyear',
 }
 
 
@@ -46,6 +47,7 @@ def makeJson(list, station)
     weekday  = []
     saturday = []
     holiday  = []
+    newyear  = []
 
     list.each do |trip|
         # 系統番号=>行先
@@ -77,14 +79,13 @@ def makeJson(list, station)
 
         # 運行ダイヤ振り分け
         if (trip[0].match(/3_平日/))
-            # weekday.push({trip[2], route, dest})
             weekday.push(trip_data)
         elsif (trip[0].match(/3_土曜/))
-            # saturday.push({trip[2], route, dest})
             saturday.push(trip_data)
         elsif (trip[0].match(/3_日祝/))
-            # holiday.push({trip[2], route, dest])
             holiday.push(trip_data)
+        elsif (trip[0].match(/3_年末・年始/))
+            newyear.push(trip_data)
         else
         end
     end
@@ -93,6 +94,7 @@ def makeJson(list, station)
     weekday.sort_by! {|trip| trip['depTime']}
     saturday.sort_by! {|trip| trip['depTime']}
     holiday.sort_by! {|trip| trip['depTime']}
+    newyear.sort_by! {|trip| trip['depTime']}
 
     # JSONファイル出力処理
     File.open('./json/' + station + '_weekday.json', 'w') { |file|
@@ -103,6 +105,9 @@ def makeJson(list, station)
     }
     File.open('./json/' + station + '_holiday.json', 'w') { |file|
         file.puts(JSON.generate(holiday))
+    }
+    File.open('./json/' + station + '_newyear.json', 'w') { |file|
+        file.puts(JSON.generate(newyear))
     }
 
 end
@@ -145,6 +150,7 @@ exception_date = {
     'weekday'  => [],
     'saturday' => [],
     'holiday'  => [],
+    'newyear'  => [],
 }
 
 CSV.foreach(__dir__ + '/' + DATA_DIR + CALENDAR_FILE, liberal_parsing: true) do |row|

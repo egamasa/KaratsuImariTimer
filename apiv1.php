@@ -43,7 +43,7 @@ $DIA_TYPE_LIST = [
 $DIA_TYPE_NAME = [
     'weekday'  => '平日',
     'saturday' => '土曜',
-    'holiday'  => '日祝'
+    'holiday'  => '日祝',
     'newyear'  => '年末年始'
 ];
 
